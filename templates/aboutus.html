@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+{% block body %}{{setting.description}}{% endblock %}
+{% block content %}{{setting.keywords}}{% endblock %}
+
+{% block news %}
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+
+                </li>
+                <span style="padding-left: 3px;"> /</span>
+                <li class="active">
+                    About
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                {% for i in setting %}
+
+                {{i.aboutus|safe}}
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<!-- ---------------------------------------------------------------------------------------------------- -->
+<section class="section-margin calc-60px">
+    <div class="container">
+        <div class="section-intro pb-60px">
+            <p>Popular Item in the market</p>
+            <h2>Best <span class="section-intro__style">Sellers</span></h2>
+        </div>
+        <div class="owl-carousel owl-theme" id="bestSellerCarousel">
+            {% for i in product_picked %}
+            <div class="card text-center card-product">
+                <div class="card-product__img">
+                    <img class="img-fluid" src="{{i.image.url}}" alt="">
+                    <ul class="card-product__imgOverlay">
+                        <li><button><i class="ti-search"></i></button></li>
+                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                        <li><button><i class="ti-heart"></i></button></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <p>{{i.category}}</p>
+                    <h4 class="card-product__title"><a href="/product-detail/{{i.id}}/">{{i.title}}</a></h4>
+                    <p class="card-product__price">${{i.price|safe}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endblock %}

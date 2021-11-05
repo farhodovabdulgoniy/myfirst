@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Posts{% endblock %}
+
+{% block banner %}
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+
+            </li>
+            <span style="padding-left: 3px;"> /</span>
+            <li class="active">
+                News
+            </li>
+        </ul>
+    </div>
+</div>
+
+<section class="blog mt-3">
+    <div class="container">
+        <div class="section-intro pb-60px">
+            <h2>Latest <span class="section-intro__style">News</span></h2>
+        </div>
+
+        <div class="row">
+            {% for i in post %}
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="card card-blog">
+                    <div class="card-blog__img">
+                        <img class="card-img rounded-0" src="{{i.image.url}}" alt="">
+                    </div>
+                    <div class="card-body">
+                        <ul class="card-blog__info">
+                            <li>By {{i.author}}</li>
+                        </ul>
+                        <h4 class="card-blog__title"><a href="/post-detail/{{i.id}}/">{{i.title}}</a></h4>
+                        <p>{{i.description}}</p>
+                        <a class="card-blog__link" href="/post-detail/{{i.id}}/">Read More <i
+                                class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="offer" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 20px 30px"
+    data-top-bottom="background-position: 0 20px">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="offer__content text-center">
+                    <h3>Up To 50% Off</h3>
+                    <h4>Winter Sale</h4>
+                    <p>Him she'd let them sixth saw light</p>
+                    <a class="button button--active mt-3 mt-xl-4" href="{% url 'all_products' %}">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-margin calc-60px">
+    <div class="container">
+        <div class="section-intro pb-60px">
+            <p>Popular Item in the market</p>
+            <h2>Best <span class="section-intro__style">Sellers</span></h2>
+        </div>
+        <div class="owl-carousel owl-theme" id="bestSellerCarousel">
+            {% for i in product_picked %}
+            <div class="card text-center card-product">
+                <div class="card-product__img">
+                    <img class="img-fluid" src="{{i.image.url}}" alt="">
+                    <ul class="card-product__imgOverlay">
+                        <li><button><i class="ti-search"></i></button></li>
+                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                        <li><button><i class="ti-heart"></i></button></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <p>{{i.category}}</p>
+                    <h4 class="card-product__title"><a href="/product-detail/{{i.id}}/">{{i.title}}</a></h4>
+                    <p class="card-product__price">${{i.price|safe}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endblock %}
