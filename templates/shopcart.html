@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in shopcart %}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="{{i.product.image.url}}" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{i.product.title}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>${{i.product.price}}</h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+                                    <input type="number" name="amount" id="sst" maxlength="{{i.product.amount}}" value="1"
+                                        title="Quantity:" class="input-text qty" min="1" max="{{i.product.amount}}">
+                                    <button
+                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                        class="increase items-count" type="button"><i
+                                            class="lnr lnr-chevron-up"></i></button>
+                                    <button
+                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                        class="reduced items-count" type="button"><i
+                                            class="lnr lnr-chevron-down"></i></button>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>${{total}}</h5>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td>
+                                <h5>{{total}}</h5>
+                            </td>
+                            <td><a href="{% url 'delete_from_cart' i.id %}">Delete from shopcart</a></td>
+                            <td><a href="">Buy Know</a></td>
+                        </tr>
+                        {% endfor %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->
+{% endblock %}

@@ -37,6 +37,13 @@
             <p>Popular Item in the market</p>
             <h2>Trending <span class="section-intro__style">Product</span></h2>
         </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
         <div class="row">
             {% for i in product_latest %}
             <div class="col-md-6 col-lg-4 col-xl-3">
@@ -45,8 +52,7 @@
                         <img class="card-img" src="{{i.image.url}}" alt="">
                         <ul class="card-product__imgOverlay">
                             <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
+                            <li><a href="{% url 'addtoshopcart' i.id %}"><i class="ti-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="card-body">

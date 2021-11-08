@@ -5,27 +5,26 @@
 
 {% block banner %}
 <!-- ================ start banner area ================= -->
-<section class="blog-banner-area" id="contact">
-    <div class="container h-100">
-        <div class="blog-banner">
-            <div class="text-center">
-                <h1>Contact Us</h1>
-                <nav aria-label="breadcrumb" class="banner-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-                    </ol>
-                </nav>
+<section class="offer" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 20px 30px"
+    data-top-bottom="background-position: 0 20px">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="offer__content text-center">
+                    <h3>Up To 50% Off</h3>
+                    <h4>Winter Sale</h4>
+                    <p>Him she'd let them sixth saw light</p>
+                    <a class="button button--active mt-3 mt-xl-4" href="{% url 'all_products' %}">Shop Now</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ================ end banner area ================= -->
 {% endblock %}
 
 {% block body %}
 <div class="row">
-    <div class="col-md-4 col-lg-3 mb-4 mb-md-0 mt-3">
+    <div class="col-md-4 col-lg-3 mb-4 mb-md-0 mt-3 ml-5">
         {% for i in setting %}
         <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-home"></i></span>
@@ -50,7 +49,7 @@
         </div>
         {% endfor %}
     </div>
-    <div class="col-md-8 col-lg-9 mt-3">
+    <div class="col-md-8 col-lg-8 mt-3">
         {% if messages %}
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }}" role="alert">
@@ -63,21 +62,20 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-lg-5">
-                    <div class="form-group">
-                        <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name" required>
+                    <div class="form-group mt-3">
+                        <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" name="email" id="email" type="email"
+                        <input class="form-control" name="email" type="email"
                             placeholder="Enter email address" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject"
-                            required>
+                        <input class="form-control" name="subject"  type="text" placeholder="Enter Subject" required>
                     </div>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-7 mt-3">
                     <div class="form-group">
-                        <textarea class="form-control different-control w-100" name="message" id="message" cols="30"
+                        <textarea class="form-control different-control w-100" name="message" cols="30"
                             rows="5" placeholder="Enter Message" required></textarea>
                     </div>
                 </div>

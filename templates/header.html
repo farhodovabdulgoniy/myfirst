@@ -20,13 +20,15 @@
               <ul class="dropdown-menu">
                 <li class="nav-item"><a class="nav-link" href="{% url 'all_products' %}">All products</a></li>
                 {% for i in category %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'category_products' i.id i.slug %}">{{i.title}}</a></li>
+                <li class="nav-item"><a class="nav-link"
+                    href="{% url 'category_products' i.id i.slug %}">{{i.title}}</a></li>
                 {% endfor %}
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="/aboutus/" id="About">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}" id="About">About</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'post' %}" id="News">News</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'lic' %}" id="Licenses">Licenses</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
             <li class="nav-item submenu dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                 aria-expanded="false">Pages</a>
@@ -35,19 +37,17 @@
                 <li class="nav-item"><a class="nav-link" href="/userlogout/">Logout</a></li>
                 <li class="nav-item"><a class="nav-link" href="tracking-order.html">My orders</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>  
+                <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="/userlogin/">Login</a></li>
                 {% endif %}
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
           </ul>
 
           <ul class="nav-shop">
             <li class="nav-item"><button><i class="ti-search"></i></button></li>
-            <li class="nav-item"><button><i class="ti-shopping-cart"></i><span
-                  class="nav-shop__circle">3</span></button> </li>
-            <li class="nav-item"><a class="button button-header" href="#">Buy Now</a></li>
+            <li class="nav-item"><a href="{% url 'shopcart' %}"><i class="ti-shopping-cart"></i></a><span class="nav-shop__circle">3</span></li>
+            <li class="nav-item"><a class="button button-header" href="{% url 'shopcart' %}">Buy Now</a></li>
           </ul>
         </div>
       </div>

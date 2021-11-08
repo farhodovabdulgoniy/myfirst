@@ -36,7 +36,7 @@ def product_detail(request,pk):
     category = Category.objects.all()
     product_picked = Product.objects.all().order_by('?')[:8]
     product_single = Product.objects.get(id=pk)
-    comments = Comment.objects.filter(product_id=pk,status='True')
+    comments = Comment.objects.filter(product_id=pk,status='True').order_by('-id')
     context = {
             'setting':setting,
             'category':category,
@@ -58,63 +58,6 @@ def aboutus(request):
         'product_picked':product_picked,
     }
     return render(request,'aboutus.html',context)
-
-
-def register(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username,password=password)
-            login(request,user)
-            current_user = request.user 
-            data = UserProfile()
-            data.user_id = current_user.id 
-            data.image = "user_images/user.png"
-            data.save()
-            return HttpResponseRedirect('/')
-        else:
-            messages.warning(request,form.errors)
-            return HttpResponseRedirect('/register/')
-    form = SignUpForm()
-    category = Category.objects.all()
-    setting = Setting.objects.all()
-    context = {
-        'category':category,
-        'form':form,
-        'setting':setting,
-    }
-    return render(request,'register.html',context)
-
-
-def userlogout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
-
-
-def userlogin(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username,password=password)
-        if user is not None:
-            login(request,user)
-            current_user = request.user
-            userprofile = UserProfile.objects.get(user_id=current_user.id)
-            request.session['userimage']=userprofile.image.url
-            return HttpResponseRedirect('/')
-        else:
-            messages.warning(request,'Login error!Username or password incorrect!')
-            return HttpResponseRedirect('/userlogin/')
-    category = Category.objects.all()
-    setting = Setting.objects.all()
-    context = {
-        'setting':setting,
-        'category':category,
-    }
-    return render(request,'userlogin.html',context)
 
 
 def category_products(request,pk,slug):
@@ -208,6 +151,9 @@ def contact(request):
             data.save()
             messages.success(request,'Your Message has been sent!')
             return HttpResponseRedirect('/contact/')
+        else:
+            messages.warning(request,'Please fill in the form correctly and carefully!')
+            return HttpResponseRedirect('/contact/')
 
     form = ContactForm
     category = Category.objects.all()
@@ -221,3 +167,19 @@ def contact(request):
     }
     return render(request,'contactus.html',context)
 
+
+def contact_single_page(request):
+    url = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            data = ContactMessage()
+            data.name = form.cleaned_data.get('name')
+            data.email = form.cleaned_data.get('email')
+            data.subject = form.cleaned_data.get('subject')
+            data.message = form.cleaned_data.get('message')
+            data.ip = request.META.get('REMOTE_ADDR')
+            data.save()
+            messages.success(request,'Your Message has been sent!')
+            return HttpResponseRedirect(url)
+    return HttpResponseRedirect(url)

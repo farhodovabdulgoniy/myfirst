@@ -1,4 +1,4 @@
-#!/home/user/Desktop/projects/myshop/env/bin/python3
+#!/home/user/aroma-shop/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

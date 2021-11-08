@@ -22,30 +22,32 @@
                         <h4 class="footer_title">Quick Links</h4>
                         <ul class="list">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/aboutus/">About</a></li>
-                            <li><a href="#">News</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{% url 'aboutus' %}">About</a></li>
+                            <li><a href="{% url 'post' %}">News</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            <li><a href="{% url 'lic' %}">Licenses</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
+                        {% for i in setting %}
                         <h4 class="footer_title">Contact Us</h4>
                         <div class="ml-40">
                             <p class="sm-head">
                                 <span class="fa fa-location-arrow"></span>
                                 Head Office
                             </p>
-                            <p>123, Main Street, Your City</p>
+                            <p>{{i.address}}</p>
 
                             <p class="sm-head">
                                 <span class="fa fa-phone"></span>
                                 Phone Number
                             </p>
                             <p>
-                                +123 456 7890 <br>
-                                +123 456 7890
+                            {{i.phone}}
+                                
                             </p>
 
                             <p class="sm-head">
@@ -53,10 +55,10 @@
                                 Email
                             </p>
                             <p>
-                                free@infoexample.com <br>
-                                www.infoexample.com
+                                {{i.email}}
                             </p>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -70,8 +72,7 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;
                     <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
-                    made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                        target="_blank">Colorlib</a>
+                    made with our company
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>

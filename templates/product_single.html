@@ -19,7 +19,7 @@
                     <h2>${{product_single.price}}</h2>
                     <ul class="list">
                         <li><a class="active" href="#"><span>Category</span> : {{product_single.category}}</a></li>
-                        <li><a href="#"><span>Availibility</span> : {{product_single.status}}</a></li>
+                        <li><a href="#"><span>Availibility</span> : {{product_single.amount}}</a></li>
                     </ul>
                     <p>{{product_single.description}}</p>
                     <div class="product_count">
@@ -94,6 +94,7 @@
                                         <i class="fa fa-star{% if i.rate < 4 %}-o empty{% endif %}"></i>
                                         <i class="fa fa-star{% if i.rate < 5 %}-o empty{% endif %}"></i>
                                         <span>{{i.rate|stringformat:".2f"}}</span>
+                                        <span>| {{i.create_at}}</span>
                                     </div>
                                 </div>
                                 <p>{{i.comment}}</p>
@@ -103,27 +104,27 @@
                     </div>
                     <div class="col-lg-6">
                         <h4>Add a Review</h4>
-                        <form action="/addacomment/{{product_single.id}}/" class="form-contact form-review mt-3" method="post">
+                        <form action="{% url 'addareview' product_single.id %}" class="form-contact form-review mt-3" method="post">
                             {% csrf_token %}
                             <div class="form-group">
                                 <div class="input-rating">
                                     <strong class="text-uppercase">Your rate: </strong>
                                     <div class="stars">
-                                        <input type="radio" id="star5" name="rate" value="1" class="fa fa-star"/><label
+                                        <input type="radio" id="star5" name="rate" value="1" class="fa fa-star" required/><label
                                             for="star5"></label>
-                                        <input type="radio" id="star4" name="rate" value="2" class="fa fa-star"/><label
+                                        <input type="radio" id="star4" name="rate" value="2" class="fa fa-star" required/><label
                                             for="star4"></label>
-                                        <input type="radio" id="star3" name="rate" value="3" class="fa fa-star"/><label
+                                        <input type="radio" id="star3" name="rate" value="3" class="fa fa-star" required/><label
                                             for="star3"></label>
-                                        <input type="radio" id="star2" name="rate" value="4" class="fa fa-star"/><label
+                                        <input type="radio" id="star2" name="rate" value="4" class="fa fa-star" required/><label
                                             for="star2"></label>
-                                        <input type="radio" id="star1" name="rate" value="5" class="fa fa-star"/><label
+                                        <input type="radio" id="star1" name="rate" value="5" class="fa fa-star" required/><label
                                             for="star1"></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" name="subject" type="text" placeholder="Enter Subject">
+                                <input class="form-control" name="subject" type="text" placeholder="Enter Subject" required>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control different-control w-100" name="comment" id="textarea"
