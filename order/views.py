@@ -14,41 +14,48 @@ def index(request):
     return HttpResponse('Order Page')
 
 
-# @login_required(login_url='/userlogin/')
+@login_required(login_url='/userlogin/')
 def addtoshopcart(request,pk):
-    control = 0 
-    url = request.META.get('HTTP_REFERER')
-    current_user = request.user
-    if request.method == 'POST':
+    url = request.META.get('HTTP_REFERER')  # get last url
+    current_user = request.user  # Access User Session information
+
+    checkproduct = ShopCart.objects.filter(product_id=pk)  # Check product in shopcart
+    if checkproduct:
+        control = 1  # The product is in the cart
+    else:
+        control = 0  # The product is not in the cart
+
+    if request.method == 'POST':  # if there is a post
         form = ShopCartForm(request.POST)
-        data = ShopCart.objects.get(product_id=pk,user_id=current_user.id)
         if form.is_valid():
-            if control == 1:
+            if control == 1:  # Update shopcart
+                data = ShopCart.objects.get(product_id=pk)
                 data.quantity += form.cleaned_data.get('quantity')
                 data.save()
-            else:
+            else:  # Insert to Shopcart
                 data = ShopCart()
                 data.user_id = current_user.id
-                data.product_id = id
+                data.product_id = pk
                 data.quantity = form.cleaned_data.get('quantity')
                 data.save()
         messages.success(request, "Product added to ShopCart")
         return HttpResponseRedirect(url)
-    else:
-        if control == 1:
-            data = ShopCart.objects.get(product_id=pk,user_id=current_user.id)
+    else:  # if there is no post
+        if control == 1:  # Update shopcart
+            data = ShopCart.objects.get(product_id=pk)
             data.quantity += 1
-            data.save() 
-        else: 
-            data = ShopCart()
+            data.save()  #
+        else:  # Insert to shopcart
+            data = ShopCart()  # model
             data.user_id = current_user.id
             data.product_id = pk
             data.quantity = 1
-            data.save()  
+            data.save()  #
         messages.success(request, "Product added to ShopCart")
         return HttpResponseRedirect(url)
 
 
+@login_required(login_url='/userlogin/')
 def shopcart(request):
     category = Category.objects.all()
     setting = Setting.objects.all()
@@ -69,7 +76,7 @@ def shopcart(request):
     return render(request, 'shopcart.html', context)
 
 
-# @login_required(login_url='/login')  # check login
+@login_required(login_url='/userlogin/')  # check login
 def deletefromcart(request,pk):
     ShopCart.objects.filter(id=pk).delete()
     messages.success(request, "Your item deleted from Shop Cart!")
