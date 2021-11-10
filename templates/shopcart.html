@@ -10,8 +10,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">Hizmat</th>
+                            <th scope="col">Narxi</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
                         </tr>
@@ -64,8 +64,8 @@
                             <td>
                                 <h5>{{total}}</h5>
                             </td>
-                            <td><a href="{% url 'delete_from_cart' i.id %}">Delete from shopcart</a></td>
-                            <td><a href="">Buy Know</a></td>
+                            <td><a href="{% url 'delete_from_cart' i.id %}">Qutidan o'chirish</a></td>
+                            <td><a href="">Buyurtma qilish</a></td>
                         </tr>
                         {% endfor %}
                         {% if messages %}

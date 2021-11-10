@@ -3,7 +3,7 @@
 <header class="header_area">
   <div class="main_menu">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
+      <div class="container-fluid">
         <a class="navbar-brand logo_h" href="/"><img src="{% static 'img/logo.png' %}" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,31 +13,31 @@
         </button>
         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
           <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/" id="Home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/" id="Home">Asosiy</a></li>
             <li class="nav-item submenu dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                aria-expanded="false" id="Categories">Categories</a>
+                aria-expanded="false" id="Categories">Kategoriyalar</a>
               <ul class="dropdown-menu">
-                <li class="nav-item"><a class="nav-link" href="{% url 'all_products' %}">All products</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'all_products' %}"> Barcha servislar</a></li>
                 {% for i in category %}
                 <li class="nav-item"><a class="nav-link"
                     href="{% url 'category_products' i.id i.slug %}">{{i.title}}</a></li>
                 {% endfor %}
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}" id="About">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'post' %}" id="News">News</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'lic' %}" id="Licenses">Licenses</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}" id="About">Biz haqimizda</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'post' %}" id="News">Yangiliklar</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'lic' %}" id="Licenses">Litsenziyalar</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Bog'lanish</a></li>
             <li class="nav-item submenu dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                aria-expanded="false">Pages</a>
+                aria-expanded="false">Sahifalar</a>
               <ul class="dropdown-menu">
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="/userlogout/">Logout</a></li>
-                <li class="nav-item"><a class="nav-link" href="tracking-order.html">My orders</a></li>
+                <li class="nav-item"><a class="nav-link" href="tracking-order.html">Mening buyurtmalarim</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register/">Ro'yhatdan o'tish</a></li>
                 <li class="nav-item"><a class="nav-link" href="/userlogin/">Login</a></li>
                 {% endif %}
               </ul>
@@ -47,7 +47,7 @@
           <ul class="nav-shop">
             <li class="nav-item"><button><i class="ti-search"></i></button></li>
             <li class="nav-item"><a href="{% url 'shopcart' %}"><i class="ti-shopping-cart"></i></a><span class="nav-shop__circle">3</span></li>
-            <li class="nav-item"><a class="button button-header" href="{% url 'shopcart' %}">Buy Now</a></li>
+            <li class="nav-item"><a class="button button-header" href="{% url 'shopcart' %}">Buyurtma qilish</a></li>
           </ul>
         </div>
       </div>

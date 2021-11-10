@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Profil yaratish{% endblock %}
 
 {% block body %}
 
@@ -17,7 +17,7 @@
     <form action="/register/" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Profil yaratish</button>
     </form>
 </div>
 

@@ -6,7 +6,7 @@
             <div class="row section_gap">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
-                        <h4 class="footer_title large_title">Our Mission</h4>
+                        <h4 class="footer_title large_title">Bizning maqsadimiz</h4>
                         <p>
                             So seed seed green that winged cattle in. Gathering thing made fly you're no
                             divided deep moved us lan Gathering thing us land years living.
@@ -19,35 +19,35 @@
                 </div>
                 <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
-                        <h4 class="footer_title">Quick Links</h4>
+                        <h4 class="footer_title">Ko'p foydalaniladigan havolalar</h4>
                         <ul class="list">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="{% url 'aboutus' %}">About</a></li>
-                            <li><a href="{% url 'post' %}">News</a></li>
-                            <li><a href="{% url 'contact' %}">Contact</a></li>
-                            <li><a href="{% url 'lic' %}">Licenses</a></li>
+                            <li><a href="/">Asosiy</a></li>
+                            <li><a href="{% url 'aboutus' %}">Biz haqimizda</a></li>
+                            <li><a href="{% url 'post' %}">Yangiliklar</a></li>
+                            <li><a href="{% url 'contact' %}">Bog'lanish</a></li>
+                            <li><a href="{% url 'lic' %}">Litsenziyalar</a></li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
                         {% for i in setting %}
-                        <h4 class="footer_title">Contact Us</h4>
+                        <h4 class="footer_title">Bog'lanish</h4>
                         <div class="ml-40">
                             <p class="sm-head">
                                 <span class="fa fa-location-arrow"></span>
-                                Head Office
+                                Bosh Offis
                             </p>
                             <p>{{i.address}}</p>
 
                             <p class="sm-head">
                                 <span class="fa fa-phone"></span>
-                                Phone Number
+                                Telefon raqami
                             </p>
                             <p>
-                            {{i.phone}}
-                                
+                                {{i.phone}}
+
                             </p>
 
                             <p class="sm-head">
