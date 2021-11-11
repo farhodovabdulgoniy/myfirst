@@ -1,5 +1,3 @@
-from typing import Set
-from django.conf import settings
 from django.core.checks import messages
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
@@ -9,10 +7,10 @@ from product.models import *
 from order.models import *
 from django.contrib.auth.decorators import login_required
 from user.forms import *
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from product.forms import *
 from django.contrib import messages
-from home.forms import ContactForm
+from django.contrib.auth.forms import PasswordChangeForm 
 
 
 def register(request):
@@ -27,7 +25,7 @@ def register(request):
             current_user = request.user 
             data = UserProfile()
             data.user_id = current_user.id 
-            data.image = "user_images/user.png"
+            data.image = "user_images/"
             data.save()
             return HttpResponseRedirect('/')
         else:
@@ -70,3 +68,58 @@ def userlogin(request):
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+@login_required(login_url='/userlogin/')
+def profile_update(request):
+    if request.method == "POST":
+        user_form = UserUpdateForm(request.POST,instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request,'Sizning profilingiz muvoffaqiyatli yangilandi!')
+            return HttpResponseRedirect('/profile/')
+    else:
+        category = Category.objects.all()
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+        context = {
+            'category':category,
+            'user_form':user_form,
+            'profile_form':profile_form,
+        }
+        return render(request,'user_profile.html',context)
+
+
+@login_required(login_url='/userlogin/')
+def profile(request):
+    setting = Setting.objects.all()
+    category = Category.objects.all()
+    current_user = request.user 
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    context = {
+        'category':category,
+        'profile':profile,
+        'setting':setting,
+    }
+    return render(request,'profile.html',context)
+
+
+@login_required(login_url='/user_password/')
+def user_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user,request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request,user)
+            messages.success(request,'Sizning parolingiz muvaffaqiyatli o\'zgartirildi!')
+            return HttpResponseRedirect('/profile/')
+        else:
+            messages.error(request,form.errors)
+            return HttpResponseRedirect('/user-password/')
+    else:
+        category = Category.objects.all()
+        setting = Setting.objects.all()
+        form = PasswordChangeForm(request.user)
+        return render(request,'user_password.html',{'form':form,'category':category,'setting':setting})

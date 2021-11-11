@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container mt-1" style="text-align: center;">
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Asosiy <span>/</span></li>
+                <li class="active"> <a href="{% url 'profile_update' %}">Foydalanuvchi Profili</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section mt-0">
+        <div class="container mt-0">
+            <div class="col-md-3">
+                <div class="billing-details">
+                    <div class="section-title">
+                        <h3 class="title">Foydalanuvchi Paneli</h3>
+                    </div>
+                    <div class="aside">
+                        <ul>
+                            <li><a href="{% url 'profile_update' %}">Foydalanuvchi Profili</a></li>
+                            <li><a href="/user/orders_product">Mening buyurtmalarim </a></li>
+                            <li><a href="/user/orders/">Mening tugallangan Buyurtmalarim</a></li>
+                            <li><a href="/user/comments">Mening kommentariylarim</a></li>
+                            <li><a href="{% url 'userlogout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="billing-details">
+                    <div class="section-title">
+                        <h3 class="title">Foydalanuvchi Profili Inf.</h3>
+                    </div>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                <table class="shopping-cart-table table">
+                    <tr>
+                        <th class="text-left">
+                            <a href="{% url 'profile_update' %}" class="primary-btn">Profilni yangilash / </a>
+                            <a href="{% url 'user_password' %}" class="primary-btn">Parolni o'zgartirish</a>
+                        </th>
+                        <td><img src="{{profile.image.url}}" style="border-radius:20px;height:200px"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Ism Familiya</th>
+                        <td class="text-left">{{user.first_name}} <span> </span> {{user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Email</th>
+                        <td class="text-left">{{profile.user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Telefon raqam</th>
+                        <td class="text-left">{{profile.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Shahar</th>
+                        <td class="text-left">{{profile.city}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Manzil</th>
+                        <td class="text-left">{{profile.address}}</td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-left">Davlat</th>
+                        <td class="text-left">{{profile.country}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
