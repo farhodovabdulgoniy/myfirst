@@ -45,8 +45,10 @@
           </ul>
 
           <ul class="nav-shop">
-            <li class="nav-item"><button><i class="ti-search"></i></button></li>
-            <li class="nav-item"><a href="{% url 'shopcart' %}"><i class="ti-shopping-cart"></i></a><span class="nav-shop__circle">3</span></li>
+            <li class="nav-item"><input type="search" style="border-radius: 20px; border-color: rgb(123, 170, 241);"
+                name="query"><a href="{% url 'search' %}" style="margin-left: 10px;"><i class="ti-search"></i></a></input></li>
+            <li class="nav-item"><a href="{% url 'shopcart' %}"><i class="ti-heart"></i></a><span
+                class="nav-shop__circle">3</span></li>
             <li class="nav-item"><a class="button button-header" href="{% url 'shopcart' %}">Buyurtma qilish</a></li>
           </ul>
         </div>

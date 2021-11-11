@@ -12,7 +12,7 @@ from user.forms import *
 from django.contrib.auth import authenticate,login,logout
 from product.forms import *
 from django.contrib import messages
-from home.forms import ContactForm
+from home.forms import ContactForm,SearchForm
 
 
 def index(request):
@@ -183,3 +183,26 @@ def contact_single_page(request):
             messages.success(request,'Your Message has been sent!')
             return HttpResponseRedirect(url)
     return HttpResponseRedirect(url)
+
+
+def search(request):
+    setting = Setting.objects.all()
+    if request.method == 'POST': #Check post
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data.get('query') #get form input data
+            catid = form.cleaned_data.get('catid')
+            if catid==0:
+                product = Product.objects.filter(title__icontains=query) #SELECT *FROM product WHERE title LIKE '%query%'
+            else:
+                product = Product.objects.filter(title__icontains=query, category_id=catid)
+
+            category = Category.objects.all()
+            context = {
+                'product': product,
+                'query':query,
+                'category': category,
+                'setting': setting,
+               }
+            return render(request, 'search.html', context)
+    return HttpResponseRedirect('/')

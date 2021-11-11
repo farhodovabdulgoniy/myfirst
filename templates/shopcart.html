@@ -12,8 +12,6 @@
                         <tr>
                             <th scope="col">Hizmat</th>
                             <th scope="col">Narxi</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,40 +30,12 @@
                             <td>
                                 <h5>${{i.product.price}}</h5>
                             </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="number" name="amount" id="sst" maxlength="{{i.product.amount}}" value="1"
-                                        title="Quantity:" class="input-text qty" min="1" max="{{i.product.amount}}">
-                                    <button
-                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                        class="increase items-count" type="button"><i
-                                            class="lnr lnr-chevron-up"></i></button>
-                                    <button
-                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                        class="reduced items-count" type="button"><i
-                                            class="lnr lnr-chevron-down"></i></button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>${{total}}</h5>
-                            </td>
+
                         </tr>
 
                         <tr>
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <h5>Subtotal</h5>
-                            </td>
-                            <td>
-                                <h5>{{total}}</h5>
-                            </td>
-                            <td><a href="{% url 'delete_from_cart' i.id %}">Qutidan o'chirish</a></td>
-                            <td><a href="">Buyurtma qilish</a></td>
+                            <td><a href="{% url 'delete_from_cart' i.id %}" class="btn btn-danger">Qutidan o'chirish</a></td>
+                            <td><a href="" class="btn btn-primary">Buyurtma qilish</a></td>
                         </tr>
                         {% endfor %}
                         {% if messages %}

@@ -38,7 +38,7 @@ def addtoshopcart(request,pk):
                 data.product_id = pk
                 data.quantity = form.cleaned_data.get('quantity')
                 data.save()
-        messages.success(request, "Product added to ShopCart")
+        messages.success(request, "Service added to Favorites")
         return HttpResponseRedirect(url)
     else:  # if there is no post
         if control == 1:  # Update shopcart
@@ -51,7 +51,7 @@ def addtoshopcart(request,pk):
             data.product_id = pk
             data.quantity = 1
             data.save()  #
-        messages.success(request, "Product added to ShopCart")
+        messages.success(request, "Service added to Favorites")
         return HttpResponseRedirect(url)
 
 
@@ -79,8 +79,8 @@ def shopcart(request):
 @login_required(login_url='/userlogin/')  # check login
 def deletefromcart(request,pk):
     ShopCart.objects.filter(id=pk).delete()
-    messages.success(request, "Your item deleted from Shop Cart!")
-    return HttpResponseRedirect("/shopcart")
+    messages.success(request, "Your item deleted from Favorites!")
+    return HttpResponseRedirect("/shopcart/")
 
 
 # def orderproduct(request):

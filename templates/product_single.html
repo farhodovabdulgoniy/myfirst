@@ -19,24 +19,11 @@
                     <h2>${{product_single.price}}</h2>
                     <ul class="list">
                         <li><a class="active" href="#"><span>Kategoriyasi</span> : {{product_single.category}}</a></li>
-                        <li><a href="#"><span>Availibility</span> : {{product_single.amount}}</a></li>
+                        <!-- <li><a href="#"><span>Availibility</span> : {{product_single.amount}}</a></li> -->
                     </ul>
                     <p>{{product_single.description}}</p>
                     <div class="product_count">
-                        <label for="qty">Quantity:</label>
-                        <button
-                            onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                            class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
-                        <input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:"
-                            class="input-text qty">
-                        <button
-                            onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                            class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
-                        <a class="button primary-btn" href="#">Add to Cart</a>
-                    </div>
-                    <div class="card_area d-flex align-items-center">
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+                        <a class="button primary-btn" href="#">Buyurtma qilish</a>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,13 @@
         <div class="section-intro pb-60px">
             <p>Kompaniyamiz tomonidan taklif qilinadigan hizmatlar</p>
             <h2>Barcha <span class="section-intro__style">Hizmatlar</span></h2>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
         <div class="row">
             {% for i in product %}
@@ -17,9 +24,8 @@
                     <div class="card-product__img">
                         <img class="card-img" src="{{i.image.url}}" alt="">
                         <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
+                            <li><a href="{% url 'product_detail' i.id %}"><i class="ti-search"></i></a></li>
+                            <li><a href="{% url 'addtoshopcart' i.id %}"><i class="ti-heart"></i></a></li>
                         </ul>
                     </div>
                     <div class="card-body">
