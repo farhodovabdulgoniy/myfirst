@@ -1,4 +1,4 @@
-#!/home/user/aroma-shop/env/bin/python
+#!/home/user/Desktop/projects/aroma-shop/env/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

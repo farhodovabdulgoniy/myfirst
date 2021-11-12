@@ -7,7 +7,7 @@ class ShopCart(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     product = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
-    quantity = models.IntegerField(blank=True,null=True)
+    # quantity = models.IntegerField(blank=True,null=True)
 
     def __str__(self):
         return self.product.title
@@ -16,9 +16,9 @@ class ShopCart(models.Model):
     def price(self):
         return (self.product.price)
 
-    @property
-    def amount(self):
-        return (self.quantity*self.product.price)
+    # @property
+    # def amount(self):
+    #     return (self.quantity*self.product.price)
 
     
 class Order(models.Model):
@@ -61,9 +61,9 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    # quantity = models.IntegerField()
     price = models.FloatField()
-    amount = models.FloatField()
+    # amount = models.FloatField()
     status = models.CharField(max_length=15,choices=STATUS,default='New')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)

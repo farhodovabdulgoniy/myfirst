@@ -37,8 +37,8 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Shaxsiy Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'userlogout' %}">Logout</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="/register/">Ro'yhatdan o'tish</a></li>
-                <li class="nav-item"><a class="nav-link" href="/userlogin/">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Ro'yhatdan o'tish</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'userlogin'%}">Login</a></li>
                 {% endif %}
               </ul>
             </li>

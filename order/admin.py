@@ -1,3 +1,7 @@
 from django.contrib import admin
+from order.models import ShopCart,Order,OrderProduct
 
-# Register your models here.
+
+admin.site.register(ShopCart)
+admin.site.register(Order)
+admin.site.register(OrderProduct)
