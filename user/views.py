@@ -123,3 +123,27 @@ def user_password(request):
         setting = Setting.objects.all()
         form = PasswordChangeForm(request.user)
         return render(request,'user_password.html',{'form':form,'category':category,'setting':setting})
+
+
+@login_required(login_url='/user_comments/')
+def user_comments(request):
+    setting = Setting.objects.all()
+    category = Category.objects.all()
+    current_user = request.user
+    # product_single = Product.objects.get(id=pk)
+    comment = Comment.objects.filter(user_id=current_user.id)
+    context = {
+        'comment':comment,
+        'setting':setting,
+        'category':category,
+    }
+    return render(request,'user_comments.html',context)
+
+
+@login_required(login_url='/deletecomment/')
+def deletecomment(request,pk):
+    url = request.META.get('HTTP_REFERER')
+    current_user = request.user
+    Comment.objects.filter(user_id=current_user.id,id=pk).delete()
+    messages.success(request,'Your comment deleted successfullly!')
+    return HttpResponseRedirect(url)

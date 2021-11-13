@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Foydalanuvchi kommentlari{% endblock %}
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{% url 'profile' %}">Shaxsiy Profil</a></li><span> / </span>
+            <li class="active">Foydalanuvchi kommentlari</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-10">
+                <h4 class="title">Foydalanuvchi kommentlari</h4>
+            </div>
+            <table class="shopping-cart-table table">
+                <tr>
+                    <th class="text-left">Servis</th>
+                    <th class="text-left">Reytingi</th>
+                    <th class="text-left">Mavzusi</th>
+                    <th class="text-left">Komment</th>
+                    <th class="text-left">Statusi</th>
+                    <th class="text-left">Sanasi</th>
+                    <th class="text-left">Detail</th>
+                </tr>
+                {% for i in comment %}
+                <tr>
+                    <td class="text-left">
+                            <strong>{{i.product.title}}</strong>
+                    </td>
+                    <td class="text-left">{{i.rate}}</td>
+                    <td class="text-left">{{i.subject}}</td>
+                    <td class="text-left">{{i.comment}}</td>
+                    <td class="text-left">{{i.status}}</td>
+                    <td class="text-left">{{i.create_at}}</td>
+                    <td class="text-left">
+                        <a class="primary-btn" href="{% url 'delete_comment' i.id %}"
+                            onclick="return confirm('Will be Delete ! Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

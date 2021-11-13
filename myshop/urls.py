@@ -33,6 +33,8 @@ urlpatterns = [
     path('profile/',UserViews.profile,name='profile'),
     path('profile-update',UserViews.profile_update,name='profile_update'),
     path('user-password/',UserViews.user_password,name='user_password'),
+    path('delete-comment/<int:pk>/',UserViews.deletecomment,name='delete_comment'),
+    path('user-comments/',UserViews.user_comments,name='user_comments'),
 ]
 
 

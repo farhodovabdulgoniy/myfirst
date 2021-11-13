@@ -149,12 +149,8 @@ def contact(request):
             data.message = form.cleaned_data.get('message')
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
-            messages.success(request,'Your Message has been sent!')
+            messages.success(request,'Sizning habaringiz muvaffaqiyatli yuborildi!')
             return HttpResponseRedirect('/contact/')
-        else:
-            messages.warning(request,'Please fill in the form correctly and carefully!')
-            return HttpResponseRedirect('/contact/')
-
     form = ContactForm
     category = Category.objects.all()
     setting = Setting.objects.all()

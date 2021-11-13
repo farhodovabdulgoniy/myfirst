@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Shopcart{% endblock %}
+
 {% block body %}
 <!--================Cart Area =================-->
 <section class="cart_area">
@@ -37,7 +39,11 @@
                         {% endfor %}
                         <tr>
                             <td><h4>Jami : ${{total}}</h4></td>
+                            {% if total > 0 %}
                             <td><a href="" class="btn btn-primary">Buyurtma qilish</a></td>
+                            {% else %}
+                            <td>Shopcart hozircha bo'sh!</td>
+                            {% endif %}
                         </tr>
                         {% if messages %}
                         {% for message in messages %}

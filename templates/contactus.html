@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}Bog'lanish{% endblock %}
 
 {% block banner %}
 <!-- ================ start banner area ================= -->
@@ -57,8 +57,7 @@
         </div>
         {% endfor %}
         {% endif %}
-        <form action="{% url 'contact' %}" class="form-contact contact_form" method="post" id="contactForm"
-            novalidate="novalidate">
+        <form action="{% url 'contact' %}" class="form-contact contact_form" method="post">
             {% csrf_token %}
             <div class="row">
                 <div class="col-lg-5">
