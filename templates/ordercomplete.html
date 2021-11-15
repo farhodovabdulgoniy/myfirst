@@ -27,7 +27,11 @@
                         <h5 class="title">Buyurtma tugallandi</h5>
                     </div>
                     <hr>
-                    <h2>Dear {{user.first_name}} <span> </span> {{user.last_name}}</h2>
+                    {% if user.first_name or user.last_name %}
+                    <h3>Dear {{user.first_name}} <span> </span> {{user.last_name}}</h3>
+                    {% else %}
+                    <h3>Dear {{user.username}}</h3>
+                    {% endif %}
                     <hr>
                     <h5>Sizning buyurtmangiz tugallandi!</h5>
                     <h5>Buyurtma kodi:{{ordercode}}</h5>

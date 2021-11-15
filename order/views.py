@@ -103,6 +103,7 @@ def orderproduct(request):
                 detail.order_id = data.id 
                 detail.product_id = rs.product_id
                 detail.user_id = current_user.id
+                detail.price = rs.product.price
                 detail.save()
                 product = Product.objects.get(id=rs.product_id)
                 product.save()               
