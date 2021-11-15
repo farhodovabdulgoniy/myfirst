@@ -34,10 +34,11 @@
                     <th class="text-left">Sanasi</th>
                     <th class="text-left">Detail</th>
                 </tr>
+                {% if comment %}
                 {% for i in comment %}
                 <tr>
                     <td class="text-left">
-                            <strong>{{i.product.title}}</strong>
+                        <strong>{{i.product.title}}</strong>
                     </td>
                     <td class="text-left">{{i.rate}}</td>
                     <td class="text-left">{{i.subject}}</td>
@@ -50,7 +51,11 @@
                     </td>
                 </tr>
                 {% endfor %}
-
+                {% else %}
+                <div class="alert alert-danger" role="alert" style="width: 97%; margin: auto;">
+                        Siz komment qoldirmagansiz!
+                </div>
+                {% endif %}
             </table>
         </div>
 

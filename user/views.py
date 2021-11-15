@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 
 def register(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -25,7 +25,7 @@ def register(request):
             current_user = request.user 
             data = UserProfile()
             data.user_id = current_user.id 
-            data.image = "user_images/"
+            data.image = 'user_images/'
             data.save()
             return HttpResponseRedirect('/')
         else:
@@ -82,10 +82,12 @@ def profile_update(request):
             return HttpResponseRedirect('/profile/')
     else:
         category = Category.objects.all()
+        setting = Setting.objects.all()
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.userprofile)
         context = {
             'category':category,
+            'setting':setting,
             'user_form':user_form,
             'profile_form':profile_form,
         }
@@ -106,7 +108,7 @@ def profile(request):
     return render(request,'profile.html',context)
 
 
-@login_required(login_url='/user_password/')
+@login_required(login_url='/userlogin/')
 def user_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user,request.POST)
@@ -117,7 +119,7 @@ def user_password(request):
             return HttpResponseRedirect('/profile/')
         else:
             messages.error(request,form.errors)
-            return HttpResponseRedirect('/user-password/')
+            return HttpResponseRedirect('/password/')
     else:
         category = Category.objects.all()
         setting = Setting.objects.all()
@@ -125,7 +127,7 @@ def user_password(request):
         return render(request,'user_password.html',{'form':form,'category':category,'setting':setting})
 
 
-@login_required(login_url='/user_comments/')
+@login_required(login_url='/userlogin/')
 def user_comments(request):
     setting = Setting.objects.all()
     category = Category.objects.all()
@@ -140,7 +142,7 @@ def user_comments(request):
     return render(request,'user_comments.html',context)
 
 
-@login_required(login_url='/deletecomment/')
+@login_required(login_url='/userlogin/')
 def deletecomment(request,pk):
     url = request.META.get('HTTP_REFERER')
     current_user = request.user
