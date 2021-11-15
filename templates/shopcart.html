@@ -40,7 +40,7 @@
                         <tr>
                             <td><h4>Jami : ${{total}}</h4></td>
                             {% if total > 0 %}
-                            <td><a href="" class="btn btn-primary">Buyurtma qilish</a></td>
+                            <td><a href="{% url 'orderproduct' %}" class="btn btn-primary">Buyurtma qilish</a></td>
                             {% else %}
                             <td>Shopcart hozircha bo'sh!</td>
                             {% endif %}

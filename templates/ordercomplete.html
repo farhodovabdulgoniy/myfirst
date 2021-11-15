@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">Asosiy</a></li><span> / </span>
+            <li class="active">Tugallangan buyurtmalar </li>
+        </ul>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="order-summary clearfix">
+                    <div class="section-title">
+                        <h5 class="title">Buyurtma tugallandi</h5>
+                    </div>
+                    <hr>
+                    <h2>Dear {{user.first_name}} <span> </span> {{user.last_name}}</h2>
+                    <hr>
+                    <h5>Sizning buyurtmangiz tugallandi!</h5>
+                    <h5>Buyurtma kodi:{{ordercode}}</h5>
+                    <h5>Tashakkur!</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

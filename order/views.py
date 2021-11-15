@@ -75,15 +75,18 @@ def deletefromcart(request,pk):
 
 @login_required(login_url='/userlogin/')
 def orderproduct(request):
+    setting = Setting.objects.all()
     category = Category.objects.all()
     current_user = request.user
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total = 0
-    if request.method == 'POST':  # if there is a post
+    for rs in shopcart:
+        total += rs.product.price 
+    if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             data = Order()
-            data.first_name = form.cleaned_data.get('first_name')  # get product quantity from form
+            data.first_name = form.cleaned_data.get('first_name') 
             data.last_name = form.cleaned_data.get('last_name')
             data.address = form.cleaned_data.get('address')
             data.city = form.cleaned_data.get('city')
@@ -91,22 +94,18 @@ def orderproduct(request):
             data.user_id = current_user.id
             data.total = total
             data.ip = request.META.get('REMOTE_ADDR')
-            ordercode = get_random_string(10).upper()  # random code
+            ordercode = get_random_string(10).upper() 
             data.code = ordercode
             data.save()
 
-            # Move Shopcart items to Order Product items
-           
             for rs in shopcart:
                 detail = OrderProduct()
-                detail.order_id = data.id  # Order id
+                detail.order_id = data.id 
                 detail.product_id = rs.product_id
                 detail.user_id = current_user.id
                 detail.save()
                 product = Product.objects.get(id=rs.product_id)
-                product.save()
-                # Reduce quantity of sold product from Amount of Product
-               
+                product.save()               
 
             ShopCart.objects.filter(user_id=current_user.id).delete()
             request.session['cart_items'] = 0
@@ -114,7 +113,7 @@ def orderproduct(request):
             return render(request, 'ordercomplete.html', {'ordercode': ordercode, 'category': category})
         else:
             messages.warning(request, form.errors)
-            return HttpResponseRedirect("/order/orderproduct")
+            return HttpResponseRedirect("/orderproduct/")
 
     form = OrderForm
     profile = UserProfile.objects.get(user_id=current_user.id)
@@ -123,7 +122,9 @@ def orderproduct(request):
         'category': category,
         'total': total,
         'profile': profile,
+        'setting': setting,
         'form': form,
     }
 
-    return render(request, 'order_form.html', context)
+    return render(request, 'orderproduct.html', context)
+
