@@ -3,10 +3,10 @@ from home.models import ContactMessage
 from django.forms import TextInput,Textarea,EmailInput
 
 
-class SearchForm(forms.Form):
+# class SearchForm(forms.Form):
 
-    query = forms.CharField(max_length=255)
-    catid = forms.IntegerField()
+#     query = forms.CharField(max_length=255)
+#     catid = forms.IntegerField()
 
 
 class ContactForm(forms.ModelForm):
